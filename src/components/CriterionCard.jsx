@@ -1,20 +1,28 @@
 // frontend/src/components/CriterionCard.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Card from "react-bootstrap/Card";
 import "./CriterionCard.css";
 
 export default function CriterionCard({ number, index }) {
   const navigate = useNavigate();
 
   return (
-    <div className="col-lg-3 col-md-4 col-sm-6 mb-4">
-      <div
-        className="criterion-card text-center shadow-sm"
+    <div className="col-lg-4 col-md-6 col-sm-12 mb-4">
+      <Card
+        className={`criterion-card h-100 card-${(index % 2) + 1}`}
         onClick={() => navigate(`/criterion/${number}`)}
       >
-        <div className="card-number">{index + 1}</div>
-        <h5 className="card-title mt-3">Criterion {number}</h5>
-      </div>
+        <Card.Body className="text-center d-flex flex-column justify-content-center">
+          {/* Serial number circle */}
+          <div className="card-number mb-3">{index + 1}</div>
+
+          {/* Title */}
+          <Card.Title className="card-title">
+            Criterion {number}
+          </Card.Title>
+        </Card.Body>
+      </Card>
     </div>
   );
 }

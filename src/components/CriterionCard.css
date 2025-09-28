@@ -1,32 +1,45 @@
 .criterion-card {
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding: 40px 20px 20px 20px;
-  cursor: pointer;
+  border-radius: 14px;
   transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  padding: 30px 20px;
+  font-size: 1.2rem; /* bigger text */
+}
+
+/* Two alternating background themes */
+.card-1 {
+  background: linear-gradient(135deg, #0d6efd 40%, #e6f0ff 100%);
+  color: #fff;
+}
+
+.card-2 {
+  background: linear-gradient(135deg, #FFD700 40%, #fff7cc 100%);
+  color: #002147;
 }
 
 .criterion-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
 /* Serial number circle */
 .card-number {
-  background-color: #FFD700; 
-  color: #002147; 
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #002147;
   font-weight: 700;
-  width: 35px;
-  height: 35px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+/* Title */
 .card-title {
-  color: #002147;
-  font-weight: 600;
+  font-weight: 700;
+  margin-top: 10px;
 }
