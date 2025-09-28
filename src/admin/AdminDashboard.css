@@ -1,8 +1,23 @@
-.table th,
-.table td {
-  vertical-align: middle;
+.summary-card {
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0d6efd 40%, #e6f0ff 100%);
+  color: #fff;
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: default;
 }
 
-.btn {
-  min-width: 70px;
+.summary-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.summary-card h5 {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.summary-card p {
+  font-size: 1rem;
+  font-weight: 500;
 }
