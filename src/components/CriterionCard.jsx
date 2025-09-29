@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import "./CriterionCard.css";
 
-export default function CriterionCard({ number, index }) {
+export default function CriterionCard({ number, name, index }) {
   const navigate = useNavigate();
 
   return (
@@ -21,6 +21,9 @@ export default function CriterionCard({ number, index }) {
           <Card.Title className="card-title">
             Criterion {number}
           </Card.Title>
+
+          {/* Display name below */}
+          <Card.Text className="mt-2 fw-bold">{name}</Card.Text>
         </Card.Body>
       </Card>
     </div>

@@ -21,11 +21,11 @@ export default function Home() {
       </div>
 
       <div className="row justify-content-center">
-        {criteria.map((num, index) => (
+        {criteria.map((criterion, index) => (
           <CriterionCard
-            key={num}
-            number={num}
-            title={`Criterion ${num}`}
+            key={criterion.criterionNumber}
+            number={criterion.criterionNumber}
+            name={criterion.name} 
             index={index}
           />
         ))}
