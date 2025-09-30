@@ -10,19 +10,12 @@ export default function CriterionCard({ number, name, index }) {
   return (
     <div className="col-lg-4 col-md-6 col-sm-12 mb-4">
       <Card
-        className={`criterion-card h-100 card-${(index % 2) + 1}`}
+        className={`criterion-card h-100 card-${index + 1}`}
         onClick={() => navigate(`/criterion/${number}`)}
       >
         <Card.Body className="text-center d-flex flex-column justify-content-center">
-          {/* Serial number circle */}
-          <div className="card-number mb-3">{index + 1}</div>
-
-          {/* Title */}
-          <Card.Title className="card-title">
-            Criterion {number}
-          </Card.Title>
-
-          {/* Display name below */}
+          <div className="card-number mb-2">{index + 1}</div>
+          <Card.Title className="card-title">Criterion {number}</Card.Title>
           <Card.Text className="mt-2 fw-bold">{name}</Card.Text>
         </Card.Body>
       </Card>

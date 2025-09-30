@@ -1,3 +1,4 @@
+// frontend/src/pages/Home.jsx
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CriterionCard from "../components/CriterionCard";

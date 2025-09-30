@@ -31,7 +31,7 @@ export default function CriterionPage() {
               <td>{idx + 1}</td>
               <td>{item.title}</td>
               <td>
-                <a href={item.link} target="_blank">
+                <a href={item.link} target="_blank" rel="noopener noreferrer">
                   View
                 </a>
               </td>
