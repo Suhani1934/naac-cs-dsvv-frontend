@@ -6,6 +6,7 @@ import AdminSignup from "./pages/AdminSignup";
 import AdminSignin from "./pages/AdminSignin";
 import PrivateRoute from "./components/PrivateRoute";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminCriterionDetail from "./pages/AdminCriterionDetail";
 
 function App() {
   return (
@@ -25,6 +26,10 @@ function App() {
               <AdminDashboard />
             </PrivateRoute>
           }
+        />
+        <Route
+          path="/admin/criterion/:number/details"
+          element={<AdminCriterionDetail />}
         />
 
         {/* Criterion details page */}

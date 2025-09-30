@@ -59,8 +59,8 @@ export default function Navbar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  Home
+                <Link className="nav-link" to="https://www.dsvv.ac.in/" target="_blank">
+                  College
                 </Link>
               </li>
               <li className="nav-item">

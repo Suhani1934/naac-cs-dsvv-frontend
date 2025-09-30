@@ -1,0 +1,37 @@
+.dashboard-heading {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.naac-card {
+  cursor: pointer;
+  border: 2px solid #facc15; 
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: #f9fafb; 
+}
+
+.naac-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Criterion Number */
+.criterion-number {
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: #1e3a8a; /* dark academic blue */
+}
+
+/* Criterion Name */
+.criterion-name {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #111827; /* dark text for readability */
+}
+
+.link-count {
+  font-size: 0.9rem;
+  color: #374151; 
+}
