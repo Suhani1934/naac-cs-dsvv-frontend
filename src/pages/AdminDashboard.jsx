@@ -15,18 +15,18 @@ export default function AdminDashboard() {
   const [formData, setFormData] = useState({ criterionNumber: "", name: "" });
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("adminToken");
+
   useEffect(() => {
-    const token = localStorage.getItem("adminToken");
     if (!token) {
       navigate("/admin/signin");
       return;
     }
     fetchCriteria();
-  }, [navigate]);
+  }, [navigate, token]);
 
   const fetchCriteria = async () => {
     try {
-      const token = localStorage.getItem("adminToken");
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/criteria`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -60,16 +60,22 @@ export default function AdminDashboard() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("adminToken");
+
+    if (!formData.criterionNumber || !formData.name) {
+      alert("Both Criterion Number and Name are required.");
+      return;
+    }
 
     try {
       if (editing) {
+        // Update existing criterion
         await axios.put(
           `${import.meta.env.VITE_API_URL}/criteria/${editing._id}`,
           formData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
       } else {
+        // Add new criterion
         await axios.post(
           `${import.meta.env.VITE_API_URL}/criteria`,
           formData,
@@ -80,6 +86,11 @@ export default function AdminDashboard() {
       handleClose();
     } catch (err) {
       console.log("Save error:", err);
+      if (err.response && err.response.data?.error) {
+        alert(err.response.data.error);
+      } else {
+        alert("Something went wrong while saving criterion.");
+      }
     }
   };
 
@@ -87,13 +98,13 @@ export default function AdminDashboard() {
     if (!window.confirm("Are you sure you want to delete this criterion?")) return;
 
     try {
-      const token = localStorage.getItem("adminToken");
       await axios.delete(`${import.meta.env.VITE_API_URL}/criteria/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchCriteria();
     } catch (err) {
       console.log("Delete error:", err);
+      alert("Failed to delete criterion.");
     }
   };
 
@@ -158,7 +169,7 @@ export default function AdminDashboard() {
         </tbody>
       </Table>
 
-      {/* Add/Edit Modal */}
+      {/* Add/Edit Criterion Modal */}
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
@@ -170,11 +181,12 @@ export default function AdminDashboard() {
             <Form.Group className="mb-3">
               <Form.Label>Criterion Number</Form.Label>
               <Form.Control
-                type="number"
+                type="text"
                 value={formData.criterionNumber}
                 onChange={(e) =>
                   setFormData({ ...formData, criterionNumber: e.target.value })
                 }
+                placeholder="e.g., 1"
                 required
               />
             </Form.Group>
@@ -186,6 +198,7 @@ export default function AdminDashboard() {
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
+                placeholder="Criterion Name"
                 required
               />
             </Form.Group>
