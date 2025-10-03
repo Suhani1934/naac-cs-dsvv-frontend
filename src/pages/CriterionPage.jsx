@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { Accordion } from "react-bootstrap";
 
 export default function CriterionPage() {
   const { number } = useParams();
@@ -16,59 +17,37 @@ export default function CriterionPage() {
 
   return (
     <div className="container mt-5">
-      <h2 className="mb-4">Criterion {number} Details</h2>
-      <table className="table table-bordered table-hover">
-        <thead className="table-primary">
-          <tr>
-            <th>Serial Number</th>
-            <th>Title</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          {details.length > 0 ? (
-            details.map((detail) => (
-              <>
-                {/* Main heading row */}
-                <tr
-                  key={`main-${detail._id}`}
-                  className="table-secondary fw-bold"
-                >
-                  <td>{detail.mainSerialNumber}</td>
-                  <td>{detail.mainTitle}</td>
-                  <td className="text-muted">—</td>
-                </tr>
+  <h2 className="mb-4">Criterion {number} Details</h2>
 
-                {/* Subheading rows */}
-                {detail.subHeadings?.length > 0 &&
-                  detail.subHeadings.map((sub) => (
-                    <tr
-                      key={sub._id || `${detail._id}-${sub.serialNumber}`}
-                    >
-                      <td>{sub.serialNumber}</td>
-                      <td>{sub.title}</td>
-                      <td>
-                        <a
-                          href={sub.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          View
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
-              </>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="3" className="text-center text-muted">
-                No details available.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+  {details.length > 0 ? (
+    details.map((detail) => (
+      <div key={detail._id} className="mb-3 border rounded shadow-sm p-3">
+        {/* Main heading */}
+        <h5 className="fw-bold">
+          {detail.mainSerialNumber}. {detail.mainTitle}
+        </h5>
+
+        {/* Sub-headings */}
+        {detail.subHeadings?.length > 0 ? (
+          <ul className="list-group list-group-flush mt-2">
+            {detail.subHeadings.map((sub) => (
+              <li key={sub._id || `${detail._id}-${sub.serialNumber}`} className="list-group-item">
+                <strong>{sub.serialNumber}</strong>: {sub.title} -{" "}
+                <a href={sub.link} target="_blank" rel="noopener noreferrer">
+                  View
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-muted mt-2">No sub-headings available.</p>
+        )}
+      </div>
+    ))
+  ) : (
+    <p className="text-center text-muted">No details available.</p>
+  )}
+</div>
+
   );
 }
