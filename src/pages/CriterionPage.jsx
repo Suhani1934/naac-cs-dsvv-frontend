@@ -9,7 +9,7 @@ export default function CriterionPage() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}/criteria/${number}/details`) // updated route
+      .get(`${import.meta.env.VITE_API_URL}/criteria/${number}/details`)
       .then((res) => setDetails(res.data))
       .catch((err) => console.log(err));
   }, [number]);
@@ -27,16 +27,38 @@ export default function CriterionPage() {
         </thead>
         <tbody>
           {details.length > 0 ? (
-            details.map((item) => (
-              <tr key={item._id}>
-                <td>{item.serialNumber}</td>
-                <td>{item.title}</td>
-                <td>
-                  <a href={item.link} target="_blank" rel="noopener noreferrer">
-                    View
-                  </a>
-                </td>
-              </tr>
+            details.map((detail) => (
+              <>
+                {/* Main heading row */}
+                <tr
+                  key={`main-${detail._id}`}
+                  className="table-secondary fw-bold"
+                >
+                  <td>{detail.mainSerialNumber}</td>
+                  <td>{detail.mainTitle}</td>
+                  <td className="text-muted">—</td>
+                </tr>
+
+                {/* Subheading rows */}
+                {detail.subHeadings?.length > 0 &&
+                  detail.subHeadings.map((sub) => (
+                    <tr
+                      key={sub._id || `${detail._id}-${sub.serialNumber}`}
+                    >
+                      <td>{sub.serialNumber}</td>
+                      <td>{sub.title}</td>
+                      <td>
+                        <a
+                          href={sub.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          View
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+              </>
             ))
           ) : (
             <tr>
